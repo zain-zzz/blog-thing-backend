@@ -74,3 +74,57 @@ app.post("/username", async (req, res) => {
 
 })
 
+app.get("/getUsername/:email", async(req,res) => {
+  const email = req.params.email
+  
+  //console.log(email)
+
+  const user = await Users.findOne({
+    where: {
+      email: email
+    }
+  })
+
+  if (user) {
+    res.status(200).send(user.username)
+  }
+})
+
+app.get("/getPostsByEmail/:email", async (req, res) => {
+
+  const email = req.params.email
+
+  if (email != 'undefined') {
+    const user = await Users.findOne({
+      where: {
+        email: email
+      }
+    })
+
+    const username = user.username
+    res.send(await Posts.findAll({
+      where: {
+        //change to email when we sort out the username thing
+        username: email
+      }
+    }))
+  }
+  else { res.status(400).send('no email')}
+
+})
+
+app.delete("/username/:email", async(req,res) => {
+  const email = req.params.email
+  
+  console.log(email)
+
+  await Users.destroy({
+    where: {
+      email: email
+    }
+  })
+
+  res.status(200).send('deleted')
+
+})
+

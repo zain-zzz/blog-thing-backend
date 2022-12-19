@@ -14,10 +14,18 @@ async function seed (){
     }
 
     await Users.create({
-        username: 'dummy',
-        email: 'dumm123@dumbmail.com'
+        username: 'Mr. Star',
+        email: 'bigpinkloser@gmail.com'
     })
-
+    await Users.create({
+        username: 'summer_propogandant',
+        email: 'summerP@gmail.com'
+    })
+    await Users.create({
+        username: 'S4nt4_H3t3R',
+        email: 'deletesantapls@gmail.com'
+    })
+    
     console.log('database is populated!!')
 
 }
